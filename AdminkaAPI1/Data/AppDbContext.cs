@@ -7,9 +7,10 @@ using System.Web;
 
 namespace AdminkaAPI1.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext: DbContext
     {
         public AppDbContext() : base("DefaultConnection") { }
+
         public DbSet<Entry> Entries { get; set; }
 
     }

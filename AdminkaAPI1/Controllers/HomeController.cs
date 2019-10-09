@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdminkaAPI1.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,8 +11,10 @@ namespace AdminkaAPI1.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
-
+            //чтобы протестировать создание базы данных
+           // AppDbContext c = new AppDbContext();
+           // c.Database.CreateIfNotExists();
+                        
             return View();
         }
     }
