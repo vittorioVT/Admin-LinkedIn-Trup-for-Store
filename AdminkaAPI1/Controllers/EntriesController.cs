@@ -75,8 +75,28 @@ namespace AdminkaAPI1.Controllers
             {
                return BadRequest(ex.Message);
             }
-
         }
 
+        [HttpDelete]
+        public IHttpActionResult DeleteEntry(int id)
+        {
+            try
+            {
+                using (var context = new AppDbContext())
+                {
+                    var entry = context.Entries.FirstOrDefault(n => n.Id == id);
+                    if (entry == null) return NotFound();
+
+                    context.Entries.Remove(entry);
+                    context.SaveChanges();
+
+                    return Ok("Entry deleted!");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
