@@ -10,9 +10,27 @@ using System.Web.Http.Cors;
 
 namespace AdminkaAPI1.Controllers
 {
+    [EnableCors("http://localhost:4200", "*", "*")]
     public class EntriesController : ApiController
     {
-        [EnableCors("http://localhost:4200","*", "*")]
+        public IHttpActionResult GetEntry(int id)
+        {
+            try
+            {
+                using (var context = new AppDbContext())
+                {
+                    var entry = context.Entries.FirstOrDefault(n => n.Id == id);
+                    if (entry == null) return NotFound();
+                    return Ok(entry);
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
         public IHttpActionResult GetEntries()
         {
             try
