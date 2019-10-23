@@ -12,6 +12,6 @@ namespace AdminkaAPI1.Data
         public AppDbContext() : base("DefaultConnection") { }
 
         public DbSet<Entry> Entries { get; set; }
-
+        public DbSet<User> Users { get; set; }
     }
 }
