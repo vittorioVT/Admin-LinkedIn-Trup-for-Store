@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdminkaAPI1.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -12,21 +13,21 @@ namespace AdminkaAPI1.Controllers
     [RoutePrefix("auth")]
     public class AuthenticationController : ApiController
     {
-        //[Route("login")]
-        //[HttpPost]
-        //public IHttpActionResult Login([FromBody]User user)
-        //{
+        [Route("login")]
+        [HttpPost]
+        public IHttpActionResult Login([FromBody]User user)
+        {
 
-        //    return null;
-        //}
+            return null;
+        }
 
-        //[Route("register")]
-        //[HttpPost]
-        //public IHttpActionResult Register([FromBody]User user)
-        //{
+        [Route("register")]
+        [HttpPost]
+        public IHttpActionResult Register([FromBody]User user)
+        {
 
-        //    return null;
-        //}
+            return null;
+        }
 
 
 
