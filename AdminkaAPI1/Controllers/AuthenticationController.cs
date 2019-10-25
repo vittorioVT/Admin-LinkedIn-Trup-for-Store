@@ -1,4 +1,5 @@
-﻿using AdminkaAPI1.Models;
+﻿using AdminkaAPI1.Data;
+using AdminkaAPI1.Models;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -29,8 +30,23 @@ namespace AdminkaAPI1.Controllers
         [HttpPost]
         public IHttpActionResult Register([FromBody]User user)
         {
+            try
+            {
+                using (var context = new AppDbContext())
+                {
+                    var exists = context.Users.Any(n => n.UserName == user.UserName);
+                    if (exists) return BadRequest("User already exists");
 
-            return null;
+                    context.Users.Add(user);
+                    context.SaveChanges();
+
+                    return Ok(CreateToken(user));
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         private JwtPackage CreateToken(User user)
