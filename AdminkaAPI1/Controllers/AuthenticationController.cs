@@ -22,8 +22,22 @@ namespace AdminkaAPI1.Controllers
         [HttpPost]
         public IHttpActionResult Login([FromBody]User user)
         {
+            if (string.IsNullOrEmpty(user.UserName) || string.IsNullOrEmpty(user.Password))
+                return BadRequest("Enter your username and password");
 
-            return null;
+            try
+            {
+                using (var context = new AppDbContext())
+                {
+                    var exists = context.Users.Any(n => n.UserName == user.UserName && n.Password == user.Password);
+                    if (exists) return Ok(CreateToken(user));
+                    return BadRequest("Wrong credectials");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
         }
 
         [Route("register")]
